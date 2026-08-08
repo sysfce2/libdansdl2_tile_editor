@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
 	//Argument controller.
 	tools::arg_manager carg(argc, argv);
 
-	if(carg.exists("-h")) {
+	if(carg.exists("-h") || carg.exists("--help")) {
 
 		std::cout<<"tile_editor "
 			<<MAJOR_VERSION<<"."<<MINOR_VERSION<<"."<<PATCH_VERSION<<"-"<<BUILD_VERSION
@@ -42,7 +42,7 @@ int main(int argc, char ** argv)
 		return 0;
 	}
 
-	if(carg.exists("-v")) {
+	if(carg.exists("-v") || carg.exists("--version")) {
 
 		std::cout<<"tile_editor "
 			<<MAJOR_VERSION<<"."<<MINOR_VERSION<<"."<<PATCH_VERSION<<"-"<<BUILD_VERSION

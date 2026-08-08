@@ -54,6 +54,9 @@ void properties::awake(dfw::input& /*input*/) {
 
 	lm::log(log).info()<<"lookup size: "<<lookup.size()<<std::endl;
 
+	//TODO: And what if the map contains more info than the properties exposed
+	//in the config file?.
+
 	//Now we could sort them by key, I guess... TODO: But that is bull,
 	//what we would really want is for them to appear in the SAME ORDER.
 	const auto& names=blueprint->property_names;

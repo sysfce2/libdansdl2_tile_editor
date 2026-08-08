@@ -4,8 +4,8 @@ project(tile_editor)
 
 option(BUILD_TESTS "Build test code" ON)
 option(BUILD_DEBUG "Build a debug release" ON)
-option(BUILD_APPIMAGE "Build for appimage" OFF)
-option(BUILD_REGULAR "Regular build" OFF)
+option(BUILD_APPIMAGE "Build for appimage" ON)
+option(BUILD_REGULAR "Regular build" ON)
 option(WITH_C++FILESYSTEM "If true, std::filesystem::lexically_normal() will be used in the file browser. Else, an approximation with realpath will be tried" TRUE)
 
 #bin type
@@ -37,7 +37,7 @@ endif()
 #application version
 set(MAJOR_VERSION 1)
 set(MINOR_VERSION 1)
-set(PATCH_VERSION 10)
+set(PATCH_VERSION 13)
 set(BUILD_VERSION "\"${BUILD_VERSION}\"") #add some quotes to pacify the macro preprocessor
 
 if(${CMAKE_VERSION} VERSION_LESS "3.22.0")

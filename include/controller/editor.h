@@ -101,6 +101,8 @@ class editor:
 	void                        draw_set(ldv::screen&);
 	//!draws the background box for the toolset. also returns its x.
 	int                         draw_set_background(ldv::screen&);
+	//!draws the background box for a tile in the toolset.
+	void                        draw_tile_background(ldv::screen&, int, int, unsigned int, unsigned int);
 	//!draws a text item for the toolset.
 	void                        draw_set_text(ldv::screen& _screen, int _x, int _y, int _h, tile_editor::color _color, const std::string& _name, bool _is_current);
 	void                        draw_set(ldv::screen&, const tile_editor::tile_layer&);

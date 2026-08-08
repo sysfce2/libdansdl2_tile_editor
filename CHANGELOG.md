@@ -1,4 +1,4 @@
-# Changelog
+ Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -11,6 +11,19 @@ Changes will be documented under Added, Changed, Deprecated, Removed, Fixed or S
 ## Unreleased
 ### Pending
 - Confirm before exiting?
+
+## [v1.1.13]: 2026-08-08
+### Fixed
+- Fixes changing background on tileset selector.
+- Displays "displaced" tiles on editor and tileset selector.
+
+## [v1.1.12]: 2026-07-30
+### Added
+- Lctrl + click to duplicate selected item.
+
+## [v1.1.11]: 2025-06-01
+### Added
+- Right/left to change pages in thing selector.
 
 ## [v1.1.10]: 2025-06-01
 ### Fixed

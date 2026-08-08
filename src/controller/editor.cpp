@@ -598,7 +598,7 @@ void editor::right_click_input(
 }
 
 void editor::left_click_input(
-	int /*_modifiers*/,
+	int _modifiers,
 	tile_editor::thing_layer& _layer
 ) {
 
@@ -625,12 +625,32 @@ void editor::left_click_input(
 		}
 	}
 
+	//Duplicate the selected thing
+	if(_modifiers & key_modifier_lctrl && nullptr!=selected_thing) {
+
+		tile_editor::thing thing{
+			world_pos.x,
+			world_pos.y,
+			selected_thing->w,
+			selected_thing->h,
+			selected_thing->type,
+			selected_thing->color,
+			selected_thing->properties
+		};
+
+		_layer.data.push_back(thing);
+
+		//Now, select the new copy because the vector changed and we may be
+		//holding broken stuff.
+		selected_thing=&_layer.data.back();
+		return;
+	}
+
 	//This is a pointer to a vector element that is about the change... it's a
 	//good idea to nullify it.
 	selected_thing=nullptr;
 
 	//Add the current thing...
-
 	const auto prototype=thing_list.get();
 
 	tile_editor::thing thing{
@@ -809,6 +829,13 @@ void editor::arrow_input_set(
 			}
 			else if(movement_y > 0) {
 				controller->thing_list.next();
+			}
+
+			else if(movement_x < 0) {
+				controller->thing_list.previous_page();
+			}
+			else if(movement_x > 0) {
+				controller->thing_list.next_page();
 			}
 		}
 		void visit(const tile_editor::poly_layer&) {
@@ -997,6 +1024,22 @@ void editor::draw_set(
 	dispatch_layer(dispatcher);
 }
 
+void editor::draw_tile_background(
+	ldv::screen& _screen,
+	int _x,
+	int _y,
+	unsigned int _w,
+	unsigned int _h
+) {
+
+	ldv::box_representation box(
+		{_x, _y, _w, _h},
+		ldv::rgba8(32,32,32,128)
+	);
+
+	box.draw(_screen);
+}
+
 int editor::draw_set_background(
 	ldv::screen& _screen
 ) {
@@ -1030,6 +1073,7 @@ void editor::draw_set(
 	ldv::bitmap_representation bmp(
 		*tileset_textures.at(session.tilesets.at(_layer.set).image_path)
 	);
+	bmp.set_blend(ldv::representation::blends::alpha);
 
 	const int background_start{draw_set_background(_screen)};
 	const auto item_w{tile_list.get_item_w()},
@@ -1037,11 +1081,13 @@ void editor::draw_set(
 
 	for(const auto& item : tile_list.get_page()) {
 
-		const int x=background_start+item.x,
-				y=item.y;
+		int x=background_start+item.x,
+			y=item.y;
 
 		const unsigned int w=item_w,
 							h=item_h;
+
+		draw_tile_background(_screen, x-1, y-1, w+2, h+2);
 
 		if(item.index==tile_list.get_current_index()) {
 
@@ -1061,6 +1107,9 @@ void editor::draw_set(
 		bmp.set_invert_vertical(node.flags & 2);
 		bmp.center_rotation_center();
 		bmp.set_rotation(node.get_rotation());
+
+		x+=node.disp_x;
+		y-=node.disp_y;
 
 		bmp.set_location({x, y, w, h});
 
@@ -1253,6 +1302,8 @@ void editor::draw_layers(ldv::screen& _screen) {
 	visitor.screen=&_screen;
 	visitor.controller=this;
 
+	///TODO: Could I pin some layers???
+
 	switch(layer_draw_mode) {
 
 		case layer_draw_modes::all: {
@@ -1302,7 +1353,6 @@ void editor::draw_layer(
 		    y=((-tile.y)-1) * grid_data.size;
 
 		unsigned int size=grid_data.size;
-		bmp.set_location({x, y, size, size});
 
 		//TODO: Check errors with "exists"?
 		//TODO: If it fails -> DRAW DEFAULT.
@@ -1313,6 +1363,10 @@ void editor::draw_layer(
 		bmp.center_rotation_center();
 		bmp.set_rotation(sprite.get_rotation());
 
+		x+=sprite.disp_x;
+		y-=sprite.disp_y;
+
+		bmp.set_location({x, y, size, size});
 		bmp.draw(_screen, camera);
 	}
 }
