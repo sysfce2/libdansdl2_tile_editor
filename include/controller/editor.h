@@ -41,8 +41,8 @@ class editor:
 								);
 	virtual void 				loop(dfw::input&, const dfw::loop_iteration_data&);
 	virtual void 				draw(ldv::screen&, int);
-	virtual void 				awake(dfw::input& /*input*/);
-	virtual void 				slumber(dfw::input& /*input*/) {}
+	virtual void 				awake(dfw::input& /*input*/, int=-1);
+	virtual void 				slumber(dfw::input& /*input*/, int) {}
 	virtual bool				can_leave_state() const {return true;}
 	void                        load_session(const std::string&);
 	void                        load_map(const std::string&);

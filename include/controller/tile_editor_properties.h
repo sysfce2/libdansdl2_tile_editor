@@ -22,8 +22,8 @@ class tile_editor_properties:
 								tile_editor_properties(lm::logger&, ldtools::ttf_manager&, tile_editor::exchange_data&);
 	virtual void 				loop(dfw::input&, const dfw::loop_iteration_data&);
 	virtual void 				draw(ldv::screen&, int);
-	virtual void 				awake(dfw::input&);
-	virtual void 				slumber(dfw::input& /*input*/);
+	virtual void 				awake(dfw::input&, int=-1);
+	virtual void 				slumber(dfw::input& /*input*/, int);
 	virtual bool				can_leave_state() const {return true;}
 
 	private:

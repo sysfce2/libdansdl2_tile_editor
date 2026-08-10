@@ -55,7 +55,10 @@ pager{0, 0} {
 	compose_title();
 }
 
-void file_browser::awake(dfw::input& /*_input*/) {
+void file_browser::awake(
+	dfw::input& /*_input*/,
+	int
+) {
 
 	lm::log(log).info()<<"file browser controller awakens from invoker "<<exchange_data.file_browser_invoker_id<<"..."<<std::endl;
 

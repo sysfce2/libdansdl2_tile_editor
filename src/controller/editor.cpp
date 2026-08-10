@@ -79,7 +79,10 @@ editor::editor(
 	//TODO: load first grid data!
 }
 
-void editor::awake(dfw::input& /*_input*/) {
+void editor::awake(
+	dfw::input& /*_input*/,
+	int 
+) {
 
 	lm::log(log).info()<<"map editor controller awakens"<<std::endl;
 

@@ -21,7 +21,10 @@ properties::properties(
 
 }
 
-void properties::awake(dfw::input& /*input*/) {
+void properties::awake(
+	dfw::input& /*input*/,
+	int
+) {
 
 	if(!exchange_data.has(state_properties)) {
 
@@ -87,7 +90,8 @@ void properties::awake(dfw::input& /*input*/) {
 }
 
 void properties::slumber(
-	dfw::input& /*input*/
+	dfw::input& /*input*/,
+	int
 ) {
 
 	exchange_data.properties=nullptr;

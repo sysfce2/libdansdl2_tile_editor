@@ -31,7 +31,10 @@ poly_editor_properties::poly_editor_properties(
 	menu.insert(menu_layer_cancel);
 }
 
-void poly_editor_properties::awake(dfw::input&) {
+void poly_editor_properties::awake(
+	dfw::input&,
+	int
+) {
 
 	if(!exchange_data.has(state_poly_editor_properties)) {
 
@@ -70,7 +73,10 @@ void poly_editor_properties::awake(dfw::input&) {
 	current_key=0;
 }
 
-void poly_editor_properties::slumber(dfw::input&) {
+void poly_editor_properties::slumber(
+	dfw::input&,
+	int
+) {
 
 	layer=nullptr;
 }

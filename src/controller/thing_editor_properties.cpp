@@ -29,7 +29,10 @@ thing_editor_properties::thing_editor_properties(
 	menu.insert(menu_layer_cancel);
 }
 
-void thing_editor_properties::awake(dfw::input&) {
+void thing_editor_properties::awake(
+	dfw::input&,
+	int
+) {
 
 	if(!exchange_data.has(state_thing_editor_properties)) {
 
@@ -67,7 +70,10 @@ void thing_editor_properties::awake(dfw::input&) {
 	current_key=0;
 }
 
-void thing_editor_properties::slumber(dfw::input&) {
+void thing_editor_properties::slumber(
+	dfw::input&,
+	int
+) {
 
 	layer=nullptr;
 }

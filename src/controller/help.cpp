@@ -34,7 +34,10 @@ help::help(
 }
 
 
-void help::awake(dfw::input&) {
+void help::awake(
+	dfw::input&,
+	int
+) {
 
 	camera.go_to({0,0});
 }

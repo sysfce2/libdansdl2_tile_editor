@@ -36,7 +36,8 @@ layer_selector::layer_selector(
 }
 
 void layer_selector::awake(
-	dfw::input& /*input*/
+	dfw::input& /*input*/,
+	int
 ) {
 
 	if(!exchange_data.has(state_layer_selector)) {
@@ -55,7 +56,8 @@ void layer_selector::awake(
 }
 
 void layer_selector::slumber(
-	dfw::input& /*input*/
+	dfw::input& /*input*/,
+	int
 ) {
 
 	layers=nullptr;

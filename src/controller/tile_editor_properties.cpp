@@ -29,7 +29,10 @@ tile_editor_properties::tile_editor_properties(
 	menu.insert(menu_layer_cancel);
 }
 
-void tile_editor_properties::awake(dfw::input&) {
+void tile_editor_properties::awake(
+	dfw::input&,
+	int
+) {
 
 	if(!exchange_data.has(state_tile_editor_properties)) {
 
@@ -67,7 +70,10 @@ void tile_editor_properties::awake(dfw::input&) {
 	current_key=0;
 }
 
-void tile_editor_properties::slumber(dfw::input&) {
+void tile_editor_properties::slumber(
+	dfw::input&,
+	int
+) {
 
 	layer=nullptr;
 }
